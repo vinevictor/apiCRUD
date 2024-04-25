@@ -13,5 +13,18 @@ module.exports = {
             })
         }
         res.json(json);
+    },
+
+    buscarId: async(req, res)=>{
+        let json = {error:'', result:{}};
+
+        let id = req.params.id;
+        let user = await userService.buscarId(id);
+
+        if(user){
+            json.result =  user;
+        }
+
+        res.json(json);
     }
 }
