@@ -11,3 +11,5 @@ connection.connect((err) =>{
     if(err) throw err;
     console.log(`Conectado ao Banco de Dados ${process.env.DB_NAME}`)
 });
+
+module.exports = connection;
