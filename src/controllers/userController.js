@@ -26,5 +26,56 @@ module.exports = {
         }
 
         res.json(json);
+    },
+
+    inserir: async (req, res) => {
+        let json = { error: '', result: {} };
+    
+        let nome = req.body.nome;
+        let cpf = req.body.cpf;
+    
+        if (nome && cpf) {
+            let userId = await userService.inserir(nome, cpf);
+            json.result = {
+                id: userId,
+                nome,
+                cpf
+            };
+        } else {
+            json.error = 'Campos não Enviados';
+        }
+    
+        res.json(json);
+    },
+    alterar: async (req, res) => {
+        let json = { error: '', result: {} };
+    
+        let id = req.params.id;
+        let nome = req.body.nome;
+        let cpf = req.body.cpf;
+    
+        if (id && nome && cpf  ) {
+            await userService.alterar(id, nome, cpf);
+            json.result = {
+                id,
+                nome,
+                cpf
+            };
+        } else {
+            json.error = 'Campos não Enviados';
+        }
+    
+        res.json(json);
+    },
+
+    excluir: async(req, res)=>{
+        let json = { error: '', result: {} };
+
+        await userService.excluir(req.params.id);
+
+        res.json(json)
+    
     }
+    
+    
 }

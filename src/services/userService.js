@@ -25,6 +25,42 @@ module.exports = {
                 }
             });
         });
+    },
+
+    inserir: (nome, cpf) =>{
+        return new Promise((aceito, rejeitado) =>{
+
+            db.query('INSERT INTO users (nome, cpf) VALUES (?, ?)', 
+            [nome, cpf],
+             (error, results) =>{
+                if(error) {rejeitado(error); return;}
+                 aceito(results.insertId);
+            });
+        });
+    },
+
+    alterar: (nome, cpf) =>{
+        return new Promise((aceito, rejeitado) =>{
+
+            db.query('UPDATE users SET nome = ?, cpf = ? WHERE id = ? ', 
+            [nome, cpf, id],
+             (error, results) =>{
+                if(error) {rejeitado(error); return;}
+                 aceito(results.insertId);
+            });
+        });
+    },
+
+    excluir : (id) =>{
+    return new Promise((aceito, rejeitado)=> {
+        db.query('DELETE FROM users WHERE id = ?', [id], (error, results)=>{
+            if(error) {rejeitado(error); return;}
+            aceito(results);    
+        });
     }
+    )}
+
+
+
 
 };
