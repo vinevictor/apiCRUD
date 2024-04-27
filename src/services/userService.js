@@ -39,7 +39,7 @@ module.exports = {
         });
     },
 
-    alterar: (nome, cpf) =>{
+    alterar: (id, nome, cpf) =>{
         return new Promise((aceito, rejeitado) =>{
 
             db.query('UPDATE users SET nome = ?, cpf = ? WHERE id = ? ', 
@@ -58,9 +58,6 @@ module.exports = {
             aceito(results);    
         });
     }
-    )}
-
-
-
+    )},
 
 };

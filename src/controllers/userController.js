@@ -9,7 +9,8 @@ module.exports = {
         for(let i in users){
             json.result.push({
                 id: users[i].id,
-                nome: users[i].nome
+                nome: users[i].nome,
+                cpf: users[i].cpf
             })
         }
         res.json(json);
@@ -75,7 +76,85 @@ module.exports = {
 
         res.json(json)
     
+    },
+    
+    soma: async (req, res) => {
+        let json = { error: '', result: {} };
+    
+        let num1 = req.body.num1;
+        let num2 = req.body.num2;
+    
+        if (num1 && num2) {
+            let resultado = parseFloat(num1) + parseFloat(num2);
+            json.result = {
+                resultado
+            };
+            console.log(`Resultado da soma dos numeros: ${num1} + ${num2} = ${resultado}`)
+        } else {
+            json.error = 'Campos não Enviados';
+        }
+    
+        res.json(json);
+    },
+
+    subtrair: async (req, res) => {
+        let json = { error: '', result: {} };
+    
+        let num1 = req.body.num1;
+        let num2 = req.body.num2;
+    
+        if (num1 && num2) {
+            let resultado = parseFloat(num1) - parseFloat(num2);
+            json.result = {
+                resultado
+            };
+            console.log(`Resultado da subtração dos numeros: ${num1} - ${num2} = ${resultado}`)
+        } else {
+            json.error = 'Campos não Enviados';
+        }
+    
+        res.json(json);
+    },
+
+    multiplicar: async (req, res) => {
+        let json = { error: '', result: {} };
+    
+        let num1 = req.body.num1;
+        let num2 = req.body.num2;
+    
+        if (num1 && num2) {
+            let resultado = parseFloat(num1) * parseFloat(num2);
+            json.result = {
+                resultado
+            };
+            console.log(`Resultado da multiplicação dos numeros: ${num1} x ${num2} = ${resultado}`)
+        } else {
+            json.error = 'Campos não Enviados';
+        }
+    
+        res.json(json);
+    },
+
+    dividir: async (req, res) => {
+        let json = { error: '', result: {} };
+    
+        let num1 = req.body.num1;
+        let num2 = req.body.num2;
+    
+        if (num1 && num2) {
+            if (parseFloat(num2) === 0) {
+                json.error = 'Divisão por zero';
+            } else {
+                let resultado = parseFloat(num1) / parseFloat(num2);
+                json.result = {
+                    resultado
+                };
+                console.log(`Resultado da divisão dos numeros: ${num1} / ${num2} = ${resultado}`)
+            }
+        } else {
+            json.error = 'Campos não Enviados';
+        }
+    
+        res.json(json);
     }
-    
-    
 }
